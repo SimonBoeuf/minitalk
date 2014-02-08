@@ -9,8 +9,7 @@
 void	display_pid(void);
 void	launch_server(void);
 
-void	catch_1(int s, siginfo_t *info, void *context);
-void	catch_2(int s, siginfo_t *info, void *context);
+void	catch(int s, siginfo_t *info, void *context);
 
 void	add_bit_to_char(char bit);
 void	add_char_to_string(char c);
