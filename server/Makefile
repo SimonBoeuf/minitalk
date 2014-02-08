@@ -7,6 +7,7 @@ INCLUDE		= ../includes/
 SRCS		= main.c			\
 			  sig_handler.c		\
 			  buff_handler.c	\
+			  clist.c			\
 
 OBJS		= $(SRCS:.c=.o)
 
