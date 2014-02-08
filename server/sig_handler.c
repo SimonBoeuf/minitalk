@@ -7,6 +7,7 @@ void	catch_1(int s, siginfo_t *info, void *context)
 	(void)context;
 	pid = info->si_pid;
 	add_bit_to_char(s - SIGUSR1);
+	kill(pid, s);
 }
 
 void	catch_2(int s, siginfo_t *info, void *context)
@@ -16,4 +17,5 @@ void	catch_2(int s, siginfo_t *info, void *context)
 	(void)context;
 	pid = info->si_pid;
 	add_bit_to_char(s - SIGUSR2 + 1);
+	kill(pid, s);
 }
