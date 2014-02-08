@@ -27,18 +27,15 @@ void	add_char_to_string(char c)
 	}
 	else
 	{
-		if (c == 0)
-		{
-			ft_putendl(s);
-			s = NULL;
-		}
-		else
-		{
-			tmp = s;
-			s = (char*)malloc(ft_strlen(s) + 2);
-			s = ft_strcpy(s, tmp);
-			s[ft_strlen(tmp)] = c;
-			s[ft_strlen(tmp) + 1] = 0;
-		}
+		tmp = s;
+		s = (char*)malloc(ft_strlen(s) + 2);
+		s = ft_strcpy(s, tmp);
+		s[ft_strlen(tmp)] = c;
+		s[ft_strlen(tmp) + 1] = 0;
+	}
+	if (c == 0)
+	{
+		ft_putendl(s);
+		s = NULL;
 	}
 }
