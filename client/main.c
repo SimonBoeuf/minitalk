@@ -15,16 +15,29 @@ void	send_str(int	pid, char *str)
 	send_char(pid, *str);
 }
 
+void	check(int s, siginfo_t *info, void *context)
+{
+	(void)s;
+	(void)info;
+	(void)context;
+}
+
 void	send_char(int pid, char c)
 {
-	int	i;
-	int	s;
+	int					i;
+	int					s;
+	struct sigaction	*act;
 
+	act = (struct sigaction *)ft_memalloc(sizeof(*act));
+	act->sa_flags |= SA_SIGINFO;
+	act->sa_sigaction = &check;
+	sigaction(SIGUSR1, act, NULL);
+	sigaction(SIGUSR2, act, NULL);
 	i = 7;
 	while (i >= 0)
 	{
 		s = ((c >> i--) & 1 ? SIGUSR2 : SIGUSR1);
-		usleep(2);
 		kill(pid, s);
+		pause();
 	}
 }
