@@ -6,6 +6,9 @@ void	catch(int s, siginfo_t *info, void *context)
 
 	(void)context;
 	pid = info->si_pid;
-	add_bit_to_char(s == SIGUSR1 ? 0 : 1);
+	if (s == SIGUSR1)
+		add_bit_to_char(0);
+	else if (s == SIGUSR2)
+		add_bit_to_char(1);
 	kill(pid, s);
 }

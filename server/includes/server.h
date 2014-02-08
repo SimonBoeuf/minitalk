@@ -12,6 +12,5 @@ void	launch_server(void);
 void	catch(int s, siginfo_t *info, void *context);
 
 void	add_bit_to_char(char bit);
-void	add_char_to_string(char c);
 
 #endif
