@@ -2,10 +2,10 @@
 
 void	add_bit_to_char(char bit)
 {
-	static unsigned char	byte = 0;
-	static int				size = 0;
+	static char	byte = 0;
+	static int	size = 0;
 
-	byte = byte << 1;
+	byte <<= 1;
 	byte += bit;
 	if (++size == 8)
 	{
