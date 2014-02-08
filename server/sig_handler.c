@@ -13,10 +13,14 @@ void	catch(int s, siginfo_t *info, void *context)
 	(void)context;
 	pid = info->si_pid;
 	if (s == SIGUSR1)
+	{
+		sigaction(SIGUSR1, act, NULL);
 		add_bit_to_char(0);
+	}
 	else if (s == SIGUSR2)
+	{
 		add_bit_to_char(1);
-	sigaction(SIGUSR1, act, NULL);
-	sigaction(SIGUSR2, act, NULL);
+		sigaction(SIGUSR2, act, NULL);
+	}
 	g_pid = pid;
 }
