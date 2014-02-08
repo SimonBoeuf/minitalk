@@ -1,4 +1,5 @@
 # include "./includes/client.h"
+#include <unistd.h>
 
 int		main(int argc, char **argv)
 {
@@ -19,10 +20,11 @@ void	send_char(int pid, char c)
 	int	i;
 	int	s;
 
-	i = 8;
-	while (i > 0)
+	i = 7;
+	while (i >= 0)
 	{
-		s = c << (i -- -1) == 0 ? SIGUSR1 : SIGUSR2;
+		s = ((c >> i--) & 1 ? SIGUSR2 : SIGUSR1);
+		usleep(2);
 		kill(pid, s);
 	}
 }
