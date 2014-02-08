@@ -17,7 +17,7 @@ void	send_str(int	pid, char *str)
 
 void	check(int s)
 {
-	(void)s;
+	signal(s, check);
 }
 
 void	send_char(int pid, char c)

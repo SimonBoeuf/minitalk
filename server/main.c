@@ -1,5 +1,7 @@
 # include "./includes/server.h"
 
+int		g_pid;
+
 int		main(void)
 {
 	display_pid();
@@ -19,11 +21,17 @@ void	launch_server(void)
 
 	act = (struct sigaction *)ft_memalloc(sizeof(*act));
 	act->sa_flags |= SA_SIGINFO;
-	act->sa_flags |= SA_NODEFER;
 	act->sa_sigaction = &catch;
-	sigaddset(&act->sa_mask, SIGUSR1);
-	sigaddset(&act->sa_mask, SIGUSR2);
 	sigaction(SIGUSR1, act, NULL);
 	sigaction(SIGUSR2, act, NULL);
-	while(1);
+	g_pid = 0;
+	while(1)
+	{
+		if (g_pid)
+		{
+			usleep(1);
+			kill(g_pid, SIGUSR1);
+			g_pid = 0;
+		}
+	}
 }

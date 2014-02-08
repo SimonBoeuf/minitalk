@@ -25,4 +25,6 @@ void	clist_add(t_clist *list, char c);
 void	clist_print(t_clist *list);
 void	clist_del(t_clist *list);
 
+extern int	g_pid;
+
 #endif
