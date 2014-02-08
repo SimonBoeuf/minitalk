@@ -1,4 +1,4 @@
 *.o
 *.swp
 server/serveur
-client
+client/client
