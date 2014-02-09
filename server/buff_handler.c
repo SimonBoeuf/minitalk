@@ -52,7 +52,7 @@ void	add_char_to_string(char c)
 	t_list			*tmp;
 
 	if (c != 0)
-		ft_lstaddlast(&lst, ft_lstnew(&c, sizeof(char)));
+		ft_lstaddlast(&lst, ft_lstnew(&c, sizeof(char*)));
 	else
 	{
 		while (lst)
@@ -61,7 +61,9 @@ void	add_char_to_string(char c)
 			write(1, &c, 1);
 			tmp = lst;
 			lst = lst->next;
+			free(tmp->content);
 			free(tmp);
+			tmp = NULL;
 		}
 		write(1, "\n", 1);
 	}

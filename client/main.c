@@ -55,18 +55,21 @@ int		send_char(int pid, char c)
 	i = 6;
 	while (i >= 0)
 	{
-		usleep(1000);
+		usleep(50);
 		s = ((c >> i--) & 1 ? SIGUSR2 : SIGUSR1);
 		kill(pid, s);
 	}
-	usleep(1000);
-	s = (parity ? SIGUSR2 : SIGUSR1);
-	if (g_parity == s)
-		return (0);
-	else
+	if (usleep(500) == -1)
 	{
-		write(1, "hey\n", 4);
-		g_parity = 0;
-		return (1);
+		s = (parity ? SIGUSR2 : SIGUSR1);
+		if (g_parity == s)
+			return (0);
+		else
+		{
+			write(2, &c, 1);
+			g_parity = 0;
+			return (1);
+		}
 	}
+	return (1);
 }
