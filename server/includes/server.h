@@ -4,7 +4,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 # include <signal.h>
-# include "../../libft/includes/libft.h"
+# include "../../libft/libft.h"
 
 void	display_pid(void);
 void	launch_server(void);

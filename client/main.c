@@ -55,7 +55,7 @@ int		send_char(int pid, char c)
 	i = 6;
 	while (i >= 0)
 	{
-		usleep(100);
+		usleep(1000);
 		s = ((c >> i--) & 1 ? SIGUSR2 : SIGUSR1);
 		kill(pid, s);
 	}

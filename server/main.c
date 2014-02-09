@@ -27,4 +27,5 @@ void	launch_server(void)
 	act2->sa_sigaction = &catch_2;
 	sigaction(SIGUSR2, act2, NULL);
 	while(1);
+	ft_putendl("Server has died");
 }

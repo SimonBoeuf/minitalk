@@ -1,4 +1,5 @@
 # include "./includes/server.h"
+#include <stdlib.h>
 
 int		calc_parity_bit(char c)
 {
@@ -17,7 +18,7 @@ int		check_parity(char c)
 	int		calc;
 	int		reference;
 
-	reference = (c & 128) && 1;
+	reference = (c & 128) >> 7;
 	calc = calc_parity_bit(c);
 	return (reference == calc);
 }
@@ -47,30 +48,21 @@ void	add_bit_to_char(pid_t pid, char bit)
 
 void	add_char_to_string(char c)
 {
-	static char *s = NULL;
-	char		*tmp;
+	static t_list	*lst = NULL;
+	t_list			*tmp;
 
-	if (s == NULL)
-	{
-		s = (char*)malloc(2);
-		s[0] = c;
-		s[1] = 0;
-	}
+	if (c != 0)
+		ft_lstaddlast(&lst, ft_lstnew(&c, sizeof(char)));
 	else
 	{
-		if (c == 0)
+		while (lst)
 		{
-			ft_putendl(s);
-			ft_stredel(&s);
+			c = *((char*)lst->content);
+			write(1, &c, 1);
+			tmp = lst;
+			lst = lst->next;
+			free(tmp);
 		}
-		else
-		{
-			tmp = s;
-			s = (char*)malloc(ft_strlen(s) + 2);
-			s = ft_strcpy(s, tmp);
-			s[ft_strlen(tmp)] = c;
-			s[ft_strlen(tmp) + 1] = 0;
-			ft_stredel(&tmp);
-		}
+		write(1, "\n", 1);
 	}
 }
