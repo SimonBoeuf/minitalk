@@ -1,4 +1,16 @@
-# include "./includes/server.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/09 16:37:27 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/09 16:38:28 by sboeuf           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "./includes/server.h"
 
 int		main(void)
 {
@@ -26,6 +38,8 @@ void	launch_server(void)
 	act2->sa_flags |= SA_SIGINFO;
 	act2->sa_sigaction = &catch_2;
 	sigaction(SIGUSR2, act2, NULL);
-	while(1);
+	while (1)
+	{
+	}
 	ft_putendl("Server has died");
 }

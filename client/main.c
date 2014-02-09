@@ -1,5 +1,16 @@
-# include "./includes/client.h"
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/09 16:40:26 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/09 16:40:27 by sboeuf           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "./includes/client.h"
 
 volatile sig_atomic_t	g_parity;
 
@@ -15,7 +26,7 @@ void	check(int s)
 	g_parity = s;
 }
 
-void	send_str(int	pid, char *str)
+void	send_str(int pid, char *str)
 {
 	struct sigaction	*act;
 
@@ -25,7 +36,7 @@ void	send_str(int	pid, char *str)
 	sigaction(SIGUSR2, act, NULL);
 	while (*str)
 	{
-		if(!send_char(pid, *str))
+		if (!send_char(pid, *str))
 			str++;
 	}
 	send_char(pid, *str);
@@ -62,14 +73,12 @@ int		send_char(int pid, char c)
 	if (usleep(500) == -1)
 	{
 		s = (parity ? SIGUSR2 : SIGUSR1);
-		if (g_parity == s)
-			return (0);
-		else
+		if (g_parity != s)
 		{
-			write(2, &c, 1);
+			ft_putendl("An error has occured, deal with it ! (^_^)");
 			g_parity = 0;
-			return (1);
 		}
+		return (g_parity == s ? 0 : 1);
 	}
 	return (1);
 }
