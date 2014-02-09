@@ -61,7 +61,7 @@ void	add_char_to_string(char c)
 		if (c == 0)
 		{
 			ft_putendl(s);
-			s = NULL;
+			ft_stredel(&s);
 		}
 		else
 		{
@@ -70,6 +70,7 @@ void	add_char_to_string(char c)
 			s = ft_strcpy(s, tmp);
 			s[ft_strlen(tmp)] = c;
 			s[ft_strlen(tmp) + 1] = 0;
+			ft_stredel(&tmp);
 		}
 	}
 }
